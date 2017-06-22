@@ -15,7 +15,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
     
     var movies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,22 +80,30 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell) {
+        let movie = movies[indexPath.row]
+        let detailViewController = segue.destination as! DetailViewController
+        detailViewController.movie = movie
+        }
+        
+    }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

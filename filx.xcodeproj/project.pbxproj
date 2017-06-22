@@ -18,6 +18,7 @@
 		A01E26F71EFB1B5100EF6EB4 /* filxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01E26F61EFB1B5100EF6EB4 /* filxUITests.swift */; };
 		A01E27051EFB2AAB00EF6EB4 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01E27041EFB2AAB00EF6EB4 /* NowPlayingViewController.swift */; };
 		A01E27071EFB3BB300EF6EB4 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01E27061EFB3BB300EF6EB4 /* MovieCell.swift */; };
+		A051A9E11EFBEAA7006A9C52 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A051A9E01EFBEAA7006A9C52 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		A01E26F81EFB1B5100EF6EB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A01E27041EFB2AAB00EF6EB4 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		A01E27061EFB3BB300EF6EB4 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		A051A9E01EFBEAA7006A9C52 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C03870BD502FD2BE8F91DF1D /* Pods-filxUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-filxUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-filxUITests/Pods-filxUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C1F919E978207F01763E5D4A /* Pods_filxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_filxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5119F9C9DFFA646618B1CF5 /* Pods_filx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_filx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,13 +141,13 @@
 		A01E26D51EFB1B5100EF6EB4 /* filx */ = {
 			isa = PBXGroup;
 			children = (
-				A01E27041EFB2AAB00EF6EB4 /* NowPlayingViewController.swift */,
+				A01E27091EFBEA0600EF6EB4 /* Views */,
+				A01E27081EFBE9EA00EF6EB4 /* ViewControllers */,
 				A01E26D61EFB1B5100EF6EB4 /* AppDelegate.swift */,
 				A01E26DA1EFB1B5100EF6EB4 /* Main.storyboard */,
 				A01E26DD1EFB1B5100EF6EB4 /* Assets.xcassets */,
 				A01E26DF1EFB1B5100EF6EB4 /* LaunchScreen.storyboard */,
 				A01E26E21EFB1B5100EF6EB4 /* Info.plist */,
-				A01E27061EFB3BB300EF6EB4 /* MovieCell.swift */,
 			);
 			path = filx;
 			sourceTree = "<group>";
@@ -166,6 +168,23 @@
 				A01E26F81EFB1B5100EF6EB4 /* Info.plist */,
 			);
 			path = filxUITests;
+			sourceTree = "<group>";
+		};
+		A01E27081EFBE9EA00EF6EB4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A01E27041EFB2AAB00EF6EB4 /* NowPlayingViewController.swift */,
+				A051A9E01EFBEAA7006A9C52 /* DetailViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A01E27091EFBEA0600EF6EB4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A01E27061EFB3BB300EF6EB4 /* MovieCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,6 +471,7 @@
 				A01E27051EFB2AAB00EF6EB4 /* NowPlayingViewController.swift in Sources */,
 				A01E26D71EFB1B5100EF6EB4 /* AppDelegate.swift in Sources */,
 				A01E27071EFB3BB300EF6EB4 /* MovieCell.swift in Sources */,
+				A051A9E11EFBEAA7006A9C52 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +722,7 @@
 				A01E26FD1EFB1B5100EF6EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A01E26FE1EFB1B5100EF6EB4 /* Build configuration list for PBXNativeTarget "filxTests" */ = {
 			isa = XCConfigurationList;
@@ -710,6 +731,7 @@
 				A01E27001EFB1B5100EF6EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A01E27011EFB1B5100EF6EB4 /* Build configuration list for PBXNativeTarget "filxUITests" */ = {
 			isa = XCConfigurationList;
@@ -718,6 +740,7 @@
 				A01E27031EFB1B5100EF6EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
