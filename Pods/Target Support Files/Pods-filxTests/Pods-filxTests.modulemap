@@ -1,0 +1,6 @@
+framework module Pods_filxTests {
+  umbrella header "Pods-filxTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

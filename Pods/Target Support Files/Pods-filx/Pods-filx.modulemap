@@ -1,0 +1,6 @@
+framework module Pods_filx {
+  umbrella header "Pods-filx-umbrella.h"
+
+  export *
+  module * { export * }
+}
