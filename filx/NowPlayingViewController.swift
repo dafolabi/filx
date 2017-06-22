@@ -13,21 +13,27 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var movies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
     
-    
     override func viewDidLoad() {
+        // Start the activity indicator
+        activityIndicator.startAnimating()
+        
         super.viewDidLoad()
+        
+        let topOfPage = 0
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
-        tableView.insertSubview(refreshControl, at: 0)
+        tableView.insertSubview(refreshControl, at: topOfPage)
         tableView.dataSource = self
         tableView.delegate = self
         
-        fetchMovies()
         
+        fetchMovies()
     }
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
@@ -49,8 +55,10 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
                 self.movies = movies
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
-                
             }
+            // Stop the activity indicator
+            // Hides automatically if "Hides When Stopped" is enabled
+           self.activityIndicator.stopAnimating()
         }
         task.resume()
     }
@@ -94,8 +102,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+        
     /*
      // MARK: - Navigation
      
