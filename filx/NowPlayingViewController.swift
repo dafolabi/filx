@@ -18,11 +18,21 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
     var movies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
     
+    var alertController: UIAlertController!
+    
     override func viewDidLoad() {
         // Start the activity indicator
         activityIndicator.startAnimating()
         
         super.viewDidLoad()
+        
+        alertController = UIAlertController(title: "Cannot get movies", message: "The Internet connection appears to be offline", preferredStyle: .alert)
+        // create a cancel action
+        let tryAgainAction = UIAlertAction(title: "Try Again", style: .cancel) { (action) in
+            self.fetchMovies()
+        }
+        // add the cancel action to the alertController
+        alertController.addAction(tryAgainAction)
         
         let topOfPage = 0
         
@@ -48,6 +58,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
         let task = session.dataTask(with: request) { (data, reponse, error) in
             // This will run when the network request returns
             if let error = error {
+                self.present(self.alertController, animated: true)
                 print(error.localizedDescription)
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
