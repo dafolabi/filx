@@ -127,7 +127,14 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
         let baseURLString =  "https://image.tmdb.org/t/p/w500"
         
         let posterURL = URL(string: baseURLString + posterPathString)!
+        
         cell.posterImageView.af_setImage(withURL: posterURL)
+        
+        cell.posterImageView.alpha = 0.0
+
+        UIView.animate(withDuration: 1.0, animations: { () -> Void in
+            cell.posterImageView.alpha = 1.0
+        })
         
         return cell
     }
