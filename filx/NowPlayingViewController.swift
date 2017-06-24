@@ -9,13 +9,18 @@
 import UIKit
 import AlamofireImage
 
-class NowPlayingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NowPlayingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var movies: [[String: Any]] = []
+
+    var moviesCopy: [[String: Any]] = []
+
     var refreshControl: UIRefreshControl!
     
     var alertController: UIAlertController!
@@ -42,6 +47,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
         tableView.dataSource = self
         tableView.delegate = self
         
+        searchBar.delegate = self
         
         fetchMovies()
     }
@@ -54,6 +60,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
         // Do any additional setup after loading the view.
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, reponse, error) in
             // This will run when the network request returns
@@ -64,6 +71,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 let movies = dataDictionary["results"] as! [[String: Any]]
                 self.movies = movies
+                self.moviesCopy = movies
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
             }
@@ -78,6 +86,31 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
         return movies.count
     }
     
+    // This method updates filteredData based on the text in the Search Box
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // When there is no text, filteredData is the same as the original data
+        // When user has entered text into the search box
+        // Use the filter method to iterate over all items in the data array
+        // For each item, return true if the item should be included and false if the
+        // item should NOT be included
+        movies = searchText.isEmpty ? moviesCopy : moviesCopy.filter { (movie: [String: Any]) -> Bool in
+            // If dataItem matches the searchText, return true to include it
+            return  (movie["title"] as! String).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        self.movies = self.moviesCopy
+        searchBar.resignFirstResponder()
+    }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
